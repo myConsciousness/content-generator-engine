@@ -15,11 +15,18 @@
 package org.thinkit.generator.content.engine.dto
 
 import kotlinx.serialization.Serializable
+import org.thinkit.framework.envali.annotation.NestedEntity
 
 /**
- * コンテンツの作成者を管理するデータクラスです。
+ * コンテンツのマトリクスデータを管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0.0
  */
-@Serializable data class ContentMatrix(val contentCreator: ContentCreator)
+@Serializable
+data class ContentMatrix(
+        @NestedEntity val contentMeta: ContentMeta,
+        @NestedEntity val contentCreator: ContentCreator,
+        @NestedEntity val contentSelectionNodes: List<ContentSelectionNode>,
+        @NestedEntity val contentConditionNodes: List<ContentConditionNode>
+)
