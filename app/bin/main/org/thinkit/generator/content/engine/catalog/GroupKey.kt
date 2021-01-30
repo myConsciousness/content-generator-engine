@@ -12,7 +12,7 @@
  * the License.
  */
 
-package org.thinkit.generator.common.catalog.content
+package org.thinkit.generator.content.engine.catalog
 
 import org.thinkit.api.catalog.Catalog
 
