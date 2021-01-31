@@ -56,4 +56,3 @@ internal class ContentNode(
         return node.toString()
     }
 }
-}
