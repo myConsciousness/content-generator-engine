@@ -27,5 +27,5 @@ enum class SelectionNodeKey(private val code: Int) : Catalog<SelectionNodeKey> {
     /** 条件ID */
     CONDITION_ID(0);
 
-    override fun getCode(): Int = code
+    override fun getCode(): Int = this.code
 }

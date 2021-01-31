@@ -45,5 +45,5 @@ enum class GroupKey(private val code: Int) : Catalog<GroupKey> {
     /** 条件群 */
     CONDITIONS(6);
 
-    override fun getCode(): Int = code
+    override fun getCode(): Int = this.code
 }

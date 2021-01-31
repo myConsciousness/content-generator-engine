@@ -33,5 +33,5 @@ enum class ConditionKey(private val code: Int) : Catalog<ConditionKey> {
     /** 値 */
     VALUE(2);
 
-    override fun getCode(): Int = code
+    override fun getCode(): Int = this.code
 }

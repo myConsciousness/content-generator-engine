@@ -20,6 +20,6 @@ package org.thinkit.generator.content.engine.factory
  * @author Kato Shinya
  * @since 1.0.0
  */
-class ContentItem(private val key: String, private val value: String) : ContentComponent {
+internal class ContentItem(private val key: String, private val value: String) : ContentComponent {
     override fun createResource(): String = "\"${key}\" : \"${value}\""
 }

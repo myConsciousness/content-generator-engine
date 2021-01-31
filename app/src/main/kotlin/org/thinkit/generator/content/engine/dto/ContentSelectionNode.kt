@@ -27,6 +27,6 @@ import org.thinkit.framework.envali.entity.ValidatableEntity
  */
 @Serializable
 data class ContentSelectionNode(
-        @RequireNonBlank val conditionId: String,
-        @RequireNonEmpty val contentSelections: List<ContentSelection>
+                @RequireNonBlank val conditionId: String,
+                @RequireNonEmpty val contentSelections: List<ContentSelection>
 ) : ValidatableEntity

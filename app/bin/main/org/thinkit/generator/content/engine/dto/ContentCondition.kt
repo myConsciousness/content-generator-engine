@@ -26,7 +26,7 @@ import org.thinkit.framework.envali.entity.ValidatableEntity
  */
 @Serializable
 data class ContentCondition(
-        @RequireNonBlank val key: String,
-        @RequireNonBlank val operator: String,
-        @RequireNonBlank val operand: String
+                @RequireNonBlank val key: String,
+                @RequireNonBlank val operator: String,
+                @RequireNonBlank val operand: String
 ) : ValidatableEntity

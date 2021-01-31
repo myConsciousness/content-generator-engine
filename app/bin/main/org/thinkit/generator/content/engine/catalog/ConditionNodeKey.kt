@@ -30,5 +30,5 @@ enum class ConditionNodeKey(private val code: Int) : Catalog<ConditionNodeKey> {
     /** 除外 */
     EXCLUDE(1);
 
-    override fun getCode(): Int = code
+    override fun getCode(): Int = this.code
 }
