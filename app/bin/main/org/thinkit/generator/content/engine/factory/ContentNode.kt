@@ -14,12 +14,28 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.generator.content.engine.catalog.Brace
+
+/**
+ * コンテンノードを生成するファクトリークラスです。
+ *
+ * @author Kato Shinya
+ * @since 1.0.0
+ */
 internal class ContentNode(
-        val contentItemGroup: ContentItemGroup,
-        val contentNodeGroup: ContentNodeGroup
+        private val contentItemGroup: ContentItemGroup,
+        private val contentNodeGroup: ContentNodeGroup
 ) : ContentComponent {
 
     override fun createResource(): String {
-        return ""
+
+        val node: StringBuilder = StringBuilder(0)
+
+        node.append(Brace.START.getTag())
+        node.append(this.contentItemGroup.createResource())
+        node.append(this.contentNodeGroup.createResource())
+        node.append(Brace.END.getTag())
+
+        return node.toString()
     }
 }

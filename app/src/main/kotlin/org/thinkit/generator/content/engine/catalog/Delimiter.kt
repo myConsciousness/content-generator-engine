@@ -17,7 +17,7 @@ package org.thinkit.generator.content.engine.catalog
 import org.thinkit.api.catalog.BiCatalog
 
 /**
- * コンテンツの条件ノードキーを管理するカタログです。
+ * 区切りを管理するカタログです。
  *
  * @author Kato Shinya
  * @since 1.0.0

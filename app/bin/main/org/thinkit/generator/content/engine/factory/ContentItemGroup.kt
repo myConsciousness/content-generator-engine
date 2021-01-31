@@ -23,7 +23,7 @@ package org.thinkit.generator.content.engine.factory
 internal class ContentItemGroup : ContentComponent {
 
     /** コンテンツ項目リスト */
-    val contentItems: MutableList<ContentItem> = mutableListOf()
+    private val contentItems: MutableList<ContentItem> = mutableListOf()
 
     override fun createResource(): String {
         val items: StringBuilder = StringBuilder(0)
