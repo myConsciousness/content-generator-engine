@@ -14,6 +14,8 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.generator.content.engine.catalog.Delimiter
+
 /**
  * コンテンツの項目集合を生成するファクトリークラスです。
  *
@@ -28,8 +30,14 @@ internal class ContentNodeGroup(private val key: String) : ContentComponent {
     override fun createResource(): String {
 
         val nodes: StringBuilder = StringBuilder(0)
+        val comma: String = Delimiter.COMMA.getTag()
 
-        this.contentNodes.forEach { nodes.append("\"{$key}\" : ") }
+        this.contentNodes.forEach {
+            nodes.append("\"{$key}\" : ")
+            nodes.append(it.createResource()).append(comma)
+        }
+
+        nodes.setLength(nodes.length - comma.length)
 
         return nodes.toString()
     }

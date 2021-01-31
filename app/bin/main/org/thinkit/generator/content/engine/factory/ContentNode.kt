@@ -16,7 +16,7 @@ package org.thinkit.generator.content.engine.factory
 
 internal class ContentNode(
         val contentItemGroup: ContentItemGroup,
-        val contentNodes: List<ContentNode>
+        val contentNodeGroup: ContentNodeGroup
 ) : ContentComponent {
 
     override fun createResource(): String {
