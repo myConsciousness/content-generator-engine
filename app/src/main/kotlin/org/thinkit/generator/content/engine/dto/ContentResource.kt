@@ -24,8 +24,8 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class ContentResource(
-                val packageName: String,
-                val contentName: String,
-                val content: String,
-                val extension: String = "json"
+        val packageName: String,
+        val contentName: String,
+        val content: String,
+        val extension: String = "json"
 )

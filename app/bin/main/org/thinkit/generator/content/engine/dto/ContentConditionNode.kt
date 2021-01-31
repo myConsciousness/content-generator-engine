@@ -27,7 +27,7 @@ import org.thinkit.framework.envali.entity.ValidatableEntity
  */
 @Serializable
 data class ContentConditionNode(
-                @RequireNonBlank val conditionId: String,
-                val exclude: Boolean,
-                @RequireNonEmpty val contentConditions: List<ContentCondition>
+        @RequireNonBlank val conditionId: String,
+        val exclude: Boolean,
+        @RequireNonEmpty val contentConditions: List<ContentCondition>
 ) : ValidatableEntity
