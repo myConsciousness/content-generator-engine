@@ -14,7 +14,7 @@
 
 package org.thinkit.generator.content.engine.catalog
 
-import org.thinkit.api.catalog.Catalog
+import org.thinkit.api.catalog.BiCatalog
 
 /**
  * コンテンツの条件キーを管理するカタログです。
@@ -22,16 +22,19 @@ import org.thinkit.api.catalog.Catalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-internal enum class ConditionKey(private val code: Int) : Catalog<ConditionKey> {
+internal enum class ConditionKey(private val code: Int, private val tag: String) :
+        BiCatalog<ConditionKey, String> {
 
     /** キー名 */
-    KEY_NAME(0),
+    KEY(0, "key"),
 
     /** 演算子 */
-    OPERAND(1),
+    OPERATOR(1, "operator"),
 
-    /** 値 */
-    VALUE(2);
+    /** 被演算子 */
+    OPERAND(2, "operand");
 
     override fun getCode(): Int = this.code
+
+    override fun getTag(): String = this.tag
 }

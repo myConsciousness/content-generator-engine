@@ -24,10 +24,20 @@ import org.thinkit.generator.content.engine.catalog.Brace
  */
 internal class ContentNode(
         private val contentItemGroup: ContentItemGroup,
-        private val contentNodeGroup: ContentNodeGroup
+        private val contentNodeGroup: ContentNodeGroup = ContentNodeGroup.noneOf()
 ) : ContentComponent {
 
     companion object {
+
+        /**
+         * 引数として渡された情報を基に {@linl ContentNode} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @param contentItemGroup コンテンツ項目集合
+         * @return {@link ContentNode} クラスの新しいインスタンス
+         */
+        fun from(contentItemGroup: ContentItemGroup): ContentNode {
+            return ContentNode(contentItemGroup)
+        }
 
         /**
          * 引数として渡された情報を基に {@linl ContentNode} クラスの新しいインスタンスを生成し返却します。

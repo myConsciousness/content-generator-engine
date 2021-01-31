@@ -23,7 +23,7 @@ import org.thinkit.generator.content.engine.catalog.NodeType
  * @author Kato Shinya
  * @since 1.0.0
  */
-internal class ContentNodeGroup(private val key: String) : ContentComponent {
+internal class ContentNodeGroup(private val key: String = "") : ContentComponent {
 
     /** コンテンツノードリスト */
     private val contentNodes: MutableList<ContentNode> = mutableListOf()
@@ -32,6 +32,15 @@ internal class ContentNodeGroup(private val key: String) : ContentComponent {
     private var nodeType: NodeType = NodeType.OBJECT
 
     companion object {
+
+        /**
+         * 空の {@linl ContentNodeGroup} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @return 空の {@link ContentNodeGroup} クラスの新しいインスタンス
+         */
+        fun noneOf(): ContentNodeGroup {
+            return ContentNodeGroup()
+        }
 
         /**
          * 引数として渡された情報を基に {@linl ContentNodeGroup} クラスの新しいインスタンスを生成し返却します。
@@ -45,6 +54,10 @@ internal class ContentNodeGroup(private val key: String) : ContentComponent {
     }
 
     override fun createResource(): String {
+
+        if (this.key.isEmpty()) {
+            return ""
+        }
 
         val nodes: StringBuilder = StringBuilder(0)
         val comma: String = Delimiter.COMMA.getTag()

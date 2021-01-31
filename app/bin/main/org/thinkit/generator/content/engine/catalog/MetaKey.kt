@@ -14,7 +14,7 @@
 
 package org.thinkit.generator.content.engine.catalog
 
-import org.thinkit.api.catalog.Catalog
+import org.thinkit.api.catalog.BiCatalog
 
 /**
  * コンテンツのメタキーを管理するカタログです。
@@ -22,28 +22,28 @@ import org.thinkit.api.catalog.Catalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-internal enum class MetaKey(private val code: Int) : Catalog<MetaKey> {
+internal enum class MetaKey(private val code: Int, private val tag: String) :
+        BiCatalog<MetaKey, String> {
 
     /** 作成者 */
-    AUTHOR(0),
+    AUTHOR(0, "author"),
 
     /** 作成日付 */
-    CREATION_DATE(1),
+    CREATION_DATE(1, "creation_date"),
 
-    /** 更新日付 */
-    UPDATE_DATE(2),
-
-    /** パッケージ名 */
-    PACKAGE_NAME(3),
+    /** バージョン */
+    VERSION(2, "since"),
 
     /** コンテンツ名 */
-    CONTENT_NAME(4),
+    CONTENT_NAME(3, "content_name"),
 
     /** エンコード方式 */
-    ENCODING(5),
+    ENCODING(4, "encoding"),
 
     /** 説明 */
-    DESCRIPTION(6);
+    DESCRIPTION(5, "description");
 
     override fun getCode(): Int = this.code
+
+    override fun getTag(): String = this.tag
 }

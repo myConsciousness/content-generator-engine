@@ -14,7 +14,7 @@
 
 package org.thinkit.generator.content.engine.catalog
 
-import org.thinkit.api.catalog.Catalog
+import org.thinkit.api.catalog.BiCatalog
 
 /**
  * コンテンツの条件ノードキーを管理するカタログです。
@@ -22,13 +22,16 @@ import org.thinkit.api.catalog.Catalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-internal enum class ConditionNodeKey(private val code: Int) : Catalog<ConditionNodeKey> {
+internal enum class ConditionNodeKey(private val code: Int, private val tag: String) :
+        BiCatalog<ConditionNodeKey, String> {
 
     /** 条件ID */
-    CONDITION_ID(0),
+    CONDITION_ID(0, "condition_id"),
 
     /** 除外 */
-    EXCLUDE(1);
+    EXCLUDE(1, "exclude");
 
     override fun getCode(): Int = this.code
+
+    override fun getTag(): String = this.tag
 }

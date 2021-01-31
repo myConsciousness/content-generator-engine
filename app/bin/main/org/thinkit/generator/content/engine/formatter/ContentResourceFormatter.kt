@@ -15,10 +15,17 @@
 package org.thinkit.generator.content.engine.formatter
 
 import org.thinkit.framework.envali.Envali
+import org.thinkit.generator.content.engine.catalog.GroupKey
+import org.thinkit.generator.content.engine.catalog.MetaKey
+import org.thinkit.generator.content.engine.dto.ContentCreator
 import org.thinkit.generator.content.engine.dto.ContentMatrix
 import org.thinkit.generator.content.engine.dto.ContentMeta
 import org.thinkit.generator.content.engine.dto.ContentResource
+import org.thinkit.generator.content.engine.factory.ContentItem
+import org.thinkit.generator.content.engine.factory.ContentItemGroup
 import org.thinkit.generator.content.engine.factory.ContentLeafVertex
+import org.thinkit.generator.content.engine.factory.ContentNode
+import org.thinkit.generator.content.engine.factory.ContentNodeGroup
 
 /**
  * コンテンツ定義からコンテンツリソースへ整形する処理を定義したクラスです。
@@ -43,11 +50,27 @@ class ContentResourceFormatter : ResourceFormatter {
     override fun format(contentMatrix: ContentMatrix): ContentResource {
         Envali.validate(contentMatrix)
 
-        val leafVertex: ContentLeafVertex = ContentLeafVertex.newInstance()
-
         val contentMeta: ContentMeta = contentMatrix.contentMeta
+
+        val leafVertex: ContentLeafVertex = ContentLeafVertex.newInstance()
+        leafVertex.add(this.createMetaNodeGroup(contentMeta, contentMatrix.contentCreator))
 
         return ContentResource(
                 contentMeta.packageName, contentMeta.contentName, leafVertex.createResource())
+    }
+
+    private fun createMetaNodeGroup(
+            contentMeta: ContentMeta,
+            contentCreator: ContentCreator
+    ): ContentNodeGroup {
+
+        val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
+        itemGroup.add(ContentItem.from(MetaKey.AUTHOR.getTag(), contentCreator.creator))
+        itemGroup.add(ContentItem.from(MetaKey.VERSION.getTag(), contentMeta.version))
+        itemGroup.add(ContentItem.from(MetaKey.ENCODING.getTag(), contentMeta.encoding))
+        itemGroup.add(ContentItem.from(MetaKey.CONTENT_NAME.getTag(), contentMeta.contentName))
+        itemGroup.add(ContentItem.from(MetaKey.DESCRIPTION.getTag(), contentMeta.description))
+
+        return ContentNodeGroup.from(GroupKey.META.getTag()).add(ContentNode.from(itemGroup))
     }
 }
