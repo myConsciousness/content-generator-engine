@@ -22,7 +22,20 @@ import org.thinkit.generator.content.engine.catalog.Brace
  * @author Kato Shinya
  * @since 1.0.0
  */
-internal class ContentResource(private val leafVertex: ContentLeadVertex) : ContentComponent {
+internal class ContentResource(private val leafVertex: ContentLeafVertex) : ContentComponent {
+
+    companion object {
+
+        /**
+         * 引数として渡された情報を基に {@linl ContentResource} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @param key キー名
+         * @return {@link ContentResource} クラスの新しいインスタンス
+         */
+        fun from(leafVertex: ContentLeafVertex): ContentResource {
+            return ContentResource(leafVertex)
+        }
+    }
 
     override fun createResource(): String {
 

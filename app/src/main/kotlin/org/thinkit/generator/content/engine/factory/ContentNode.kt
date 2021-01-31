@@ -27,6 +27,23 @@ internal class ContentNode(
         private val contentNodeGroup: ContentNodeGroup
 ) : ContentComponent {
 
+    companion object {
+
+        /**
+         * 引数として渡された情報を基に {@linl ContentNode} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @param contentItemGroup コンテンツ項目集合
+         * @param contentNodeGroup コンテンツノード集合
+         * @return {@link ContentNode} クラスの新しいインスタンス
+         */
+        fun from(
+                contentItemGroup: ContentItemGroup,
+                contentNodeGroup: ContentNodeGroup
+        ): ContentNode {
+            return ContentNode(contentItemGroup, contentNodeGroup)
+        }
+    }
+
     override fun createResource(): String {
 
         val node: StringBuilder = StringBuilder(0)
@@ -38,4 +55,5 @@ internal class ContentNode(
 
         return node.toString()
     }
+}
 }

@@ -25,6 +25,18 @@ internal class ContentItemGroup : ContentComponent {
     /** コンテンツ項目リスト */
     private val contentItems: MutableList<ContentItem> = mutableListOf()
 
+    companion object {
+
+        /**
+         * {@link ContentItemGroup} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @return {@link ContentItemGroup} クラスの新しいインスタンス
+         */
+        fun newInstance(): ContentItemGroup {
+            return ContentItemGroup()
+        }
+    }
+
     override fun createResource(): String {
         val items: StringBuilder = StringBuilder(0)
         contentItems.forEach { items.append(it.createResource()) }

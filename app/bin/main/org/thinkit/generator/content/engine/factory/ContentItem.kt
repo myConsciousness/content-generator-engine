@@ -21,5 +21,20 @@ package org.thinkit.generator.content.engine.factory
  * @since 1.0.0
  */
 internal class ContentItem(private val key: String, private val value: String) : ContentComponent {
+
+    companion object {
+
+        /**
+         * 引数として渡されたデータを基に {@link ContentItem} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @param key キー名
+         * @param value 値
+         * @return {@link ContentItem} クラスの新しいインスタンス
+         */
+        fun from(key: String, value: String): ContentItem {
+            return ContentItem(key, value)
+        }
+    }
+
     override fun createResource(): String = "\"${key}\" : \"${value}\""
 }

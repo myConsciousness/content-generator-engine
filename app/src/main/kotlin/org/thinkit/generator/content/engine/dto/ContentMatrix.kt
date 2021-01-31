@@ -16,6 +16,7 @@ package org.thinkit.generator.content.engine.dto
 
 import kotlinx.serialization.Serializable
 import org.thinkit.framework.envali.annotation.NestedEntity
+import org.thinkit.framework.envali.entity.ValidatableEntity
 
 /**
  * コンテンツのマトリクスデータを管理するデータクラスです。
@@ -25,8 +26,8 @@ import org.thinkit.framework.envali.annotation.NestedEntity
  */
 @Serializable
 data class ContentMatrix(
-                @NestedEntity val contentMeta: ContentMeta,
-                @NestedEntity val contentCreator: ContentCreator,
-                @NestedEntity val contentSelectionNodes: List<ContentSelectionNode>,
-                @NestedEntity val contentConditionNodes: List<ContentConditionNode>
-)
+        @NestedEntity val contentMeta: ContentMeta,
+        @NestedEntity val contentCreator: ContentCreator,
+        @NestedEntity val contentSelectionNodes: List<ContentSelectionNode>,
+        @NestedEntity val contentConditionNodes: List<ContentConditionNode>
+) : ValidatableEntity

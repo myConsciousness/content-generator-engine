@@ -22,10 +22,22 @@ import org.thinkit.generator.content.engine.catalog.Delimiter
  * @author Kato Shinya
  * @since 1.0.0
  */
-internal class ContentLeadVertex : ContentComponent {
+internal class ContentLeafVertex : ContentComponent {
 
     /** コンテンツのノード全集合 */
     private val nodeGroups: MutableList<ContentNodeGroup> = mutableListOf()
+
+    companion object {
+
+        /**
+         * {@link ContentLeafVertex} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @return {@link ContentLeafVertex} クラスの新しいインスタンス
+         */
+        fun newInstance(): ContentLeafVertex {
+            return ContentLeafVertex()
+        }
+    }
 
     override fun createResource(): String {
 
@@ -48,7 +60,7 @@ internal class ContentLeadVertex : ContentComponent {
      * @param nodeGroup ノード集合
      * @return 自分自身のインスタンス
      */
-    fun add(nodeGroup: ContentNodeGroup): ContentLeadVertex {
+    fun add(nodeGroup: ContentNodeGroup): ContentLeafVertex {
         this.nodeGroups.add(nodeGroup)
         return this
     }

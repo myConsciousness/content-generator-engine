@@ -31,6 +31,19 @@ internal class ContentNodeGroup(private val key: String) : ContentComponent {
     /** ノード種別 */
     private var nodeType: NodeType = NodeType.OBJECT
 
+    companion object {
+
+        /**
+         * 引数として渡された情報を基に {@linl ContentNodeGroup} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @param key キー名
+         * @return {@link ContentNodeGroup} クラスの新しいインスタンス
+         */
+        fun from(key: String): ContentNodeGroup {
+            return ContentNodeGroup(key)
+        }
+    }
+
     override fun createResource(): String {
 
         val nodes: StringBuilder = StringBuilder(0)
