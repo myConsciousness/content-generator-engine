@@ -14,7 +14,42 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.generator.content.engine.catalog.Delimiter
+
+/**
+ * コンテンツの葉頂点を生成するファクトリークラスです。
+ *
+ * @author Kato Shinya
+ * @since 1.0.0
+ */
 internal class ContentLeadVertex : ContentComponent {
 
-    override fun createResource(): String = ""
+    /** コンテンツのノード全集合 */
+    private val nodeGroups: MutableList<ContentNodeGroup> = mutableListOf()
+
+    override fun createResource(): String {
+
+        val leafVertex: StringBuilder = StringBuilder(0)
+        val comma: String = Delimiter.COMMA.getTag()
+
+        this.nodeGroups.forEach {
+            leafVertex.append(it.createResource())
+            leafVertex.append(comma)
+        }
+
+        leafVertex.setLength(leafVertex.length - comma.length)
+
+        return leafVertex.toString()
+    }
+
+    /**
+     * コンテンツノード集合を追加します。
+     *
+     * @param nodeGroup ノード集合
+     * @return 自分自身のインスタンス
+     */
+    fun add(nodeGroup: ContentNodeGroup): ContentLeadVertex {
+        this.nodeGroups.add(nodeGroup)
+        return this
+    }
 }
