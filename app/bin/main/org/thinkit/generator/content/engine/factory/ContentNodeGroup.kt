@@ -15,6 +15,7 @@
 package org.thinkit.generator.content.engine.factory
 
 import org.thinkit.generator.content.engine.catalog.Delimiter
+import org.thinkit.generator.content.engine.catalog.NodeType
 
 /**
  * コンテンツの項目集合を生成するファクトリークラスです。
@@ -26,6 +27,9 @@ internal class ContentNodeGroup(private val key: String) : ContentComponent {
 
     /** コンテンツノードリスト */
     private val contentNodes: MutableList<ContentNode> = mutableListOf()
+
+    /** ノード種別 */
+    private var nodeType: NodeType = NodeType.OBJECT
 
     override fun createResource(): String {
 
@@ -50,6 +54,16 @@ internal class ContentNodeGroup(private val key: String) : ContentComponent {
      */
     fun add(contentNode: ContentNode): ContentNodeGroup {
         this.contentNodes.add(contentNode)
+        return this
+    }
+
+    /**
+     * JSONノードタイプを配列へ変換します。
+     *
+     * @return 自分自身のインスタンス
+     */
+    fun toArray(): ContentNodeGroup {
+        this.nodeType = NodeType.ARRAY
         return this
     }
 }
