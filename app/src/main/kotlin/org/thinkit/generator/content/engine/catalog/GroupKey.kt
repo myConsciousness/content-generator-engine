@@ -22,7 +22,7 @@ import org.thinkit.api.catalog.Catalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-enum class GroupKey(private val code: Int) : Catalog<GroupKey> {
+internal enum class GroupKey(private val code: Int) : Catalog<GroupKey> {
 
     /** 作成者 */
     CREATOR(0),

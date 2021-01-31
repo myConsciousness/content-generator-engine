@@ -22,7 +22,7 @@ import org.thinkit.api.catalog.Catalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-enum class SelectionNodeKey(private val code: Int) : Catalog<SelectionNodeKey> {
+internal enum class SelectionNodeKey(private val code: Int) : Catalog<SelectionNodeKey> {
 
     /** 条件ID */
     CONDITION_ID(0);

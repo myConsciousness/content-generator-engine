@@ -22,7 +22,7 @@ import org.thinkit.api.catalog.Catalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-enum class MetaKey(private val code: Int) : Catalog<MetaKey> {
+internal enum class MetaKey(private val code: Int) : Catalog<MetaKey> {
 
     /** 作成者 */
     AUTHOR(0),

@@ -22,7 +22,7 @@ import org.thinkit.api.catalog.BiCatalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-enum class Delimiter(private val code: Int, private val tag: String) :
+internal enum class Delimiter(private val code: Int, private val tag: String) :
         BiCatalog<Delimiter, String> {
 
     /** カンマ */

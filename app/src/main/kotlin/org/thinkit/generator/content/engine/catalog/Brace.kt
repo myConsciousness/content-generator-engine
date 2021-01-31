@@ -22,7 +22,8 @@ import org.thinkit.api.catalog.BiCatalog
  * @author Kato Shinya
  * @since 1.0.0
  */
-enum class Brace(private val code: Int, private val tag: String) : BiCatalog<Brace, String> {
+internal enum class Brace(private val code: Int, private val tag: String) :
+        BiCatalog<Brace, String> {
 
     /** 開始波括弧 */
     START(0, "{"),
