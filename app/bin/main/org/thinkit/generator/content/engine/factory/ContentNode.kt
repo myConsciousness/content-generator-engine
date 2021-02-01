@@ -23,7 +23,7 @@ import org.thinkit.generator.content.engine.catalog.Brace
  * @since 1.0.0
  */
 internal class ContentNode(
-        private val contentItemGroup: ContentItemGroup,
+        private val contentItemGroup: ContentItemGroup = ContentItemGroup.newInstance(),
         private val contentNodeGroup: ContentNodeGroup = ContentNodeGroup.noneOf()
 ) : ContentComponent {
 
@@ -36,7 +36,17 @@ internal class ContentNode(
          * @return {@link ContentNode} クラスの新しいインスタンス
          */
         fun from(contentItemGroup: ContentItemGroup): ContentNode {
-            return ContentNode(contentItemGroup)
+            return ContentNode(contentItemGroup = contentItemGroup)
+        }
+
+        /**
+         * 引数として渡された情報を基に {@linl ContentNode} クラスの新しいインスタンスを生成し返却します。
+         *
+         * @param contentNodeGroup コンテンツノード集合
+         * @return {@link ContentNode} クラスの新しいインスタンス
+         */
+        fun from(contentNodeGroup: ContentNodeGroup): ContentNode {
+            return ContentNode(contentNodeGroup = contentNodeGroup)
         }
 
         /**

@@ -28,20 +28,17 @@ internal enum class MetaKey(private val code: Int, private val tag: String) :
     /** 作成者 */
     AUTHOR(0, "author"),
 
-    /** 作成日付 */
-    CREATION_DATE(1, "creation_date"),
-
     /** バージョン */
-    VERSION(2, "since"),
+    VERSION(1, "since"),
 
     /** コンテンツ名 */
-    CONTENT_NAME(3, "content_name"),
+    CONTENT_NAME(2, "content_name"),
 
     /** エンコード方式 */
-    ENCODING(4, "encoding"),
+    ENCODING(3, "encoding"),
 
     /** 説明 */
-    DESCRIPTION(5, "description");
+    DESCRIPTION(4, "description");
 
     override fun getCode(): Int = this.code
 

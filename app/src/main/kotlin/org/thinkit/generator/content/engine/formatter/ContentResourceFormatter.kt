@@ -17,10 +17,12 @@ package org.thinkit.generator.content.engine.formatter
 import org.thinkit.framework.envali.Envali
 import org.thinkit.generator.content.engine.catalog.GroupKey
 import org.thinkit.generator.content.engine.catalog.MetaKey
+import org.thinkit.generator.content.engine.catalog.SelectionNodeKey
 import org.thinkit.generator.content.engine.dto.ContentCreator
 import org.thinkit.generator.content.engine.dto.ContentMatrix
 import org.thinkit.generator.content.engine.dto.ContentMeta
 import org.thinkit.generator.content.engine.dto.ContentResource
+import org.thinkit.generator.content.engine.dto.ContentSelectionNode
 import org.thinkit.generator.content.engine.factory.ContentItem
 import org.thinkit.generator.content.engine.factory.ContentItemGroup
 import org.thinkit.generator.content.engine.factory.ContentLeafVertex
@@ -54,6 +56,7 @@ class ContentResourceFormatter : ResourceFormatter {
 
         val leafVertex: ContentLeafVertex = ContentLeafVertex.newInstance()
         leafVertex.add(this.createMetaNodeGroup(contentMeta, contentMatrix.contentCreator))
+        leafVertex.add(this.createSelectionNodeGroup(contentMatrix.contentSelectionNodes))
 
         return ContentResource(
                 contentMeta.packageName, contentMeta.contentName, leafVertex.createResource())
@@ -72,5 +75,28 @@ class ContentResourceFormatter : ResourceFormatter {
         itemGroup.add(ContentItem.from(MetaKey.DESCRIPTION.getTag(), contentMeta.description))
 
         return ContentNodeGroup.from(GroupKey.META.getTag()).add(ContentNode.from(itemGroup))
+    }
+
+    private fun createSelectionNodeGroup(
+            selectionNodes: List<ContentSelectionNode>
+    ): ContentNodeGroup {
+
+        val selectionNodeGroup: ContentNodeGroup =
+                ContentNodeGroup.from(GroupKey.SELECTION_NODES.getTag()).toArray()
+
+        selectionNodes.forEach {
+            val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
+            itemGroup.add(ContentItem.from(SelectionNodeKey.CONDITION_ID.getTag(), it.conditionId))
+
+            it.contentSelections.forEach { itemGroup.add(ContentItem.from(it.key, it.value)) }
+
+            selectionNodeGroup.add(
+                    ContentNode.from(
+                            contentNodeGroup =
+                                    ContentNodeGroup.from(GroupKey.NODE.getTag())
+                                            .add(ContentNode.from(itemGroup))))
+        }
+
+        return selectionNodeGroup
     }
 }
