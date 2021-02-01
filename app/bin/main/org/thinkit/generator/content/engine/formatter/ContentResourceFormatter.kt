@@ -15,9 +15,13 @@
 package org.thinkit.generator.content.engine.formatter
 
 import org.thinkit.framework.envali.Envali
+import org.thinkit.generator.content.engine.catalog.ConditionKey
+import org.thinkit.generator.content.engine.catalog.ConditionNodeKey
 import org.thinkit.generator.content.engine.catalog.GroupKey
 import org.thinkit.generator.content.engine.catalog.MetaKey
 import org.thinkit.generator.content.engine.catalog.SelectionNodeKey
+import org.thinkit.generator.content.engine.dto.ContentCondition
+import org.thinkit.generator.content.engine.dto.ContentConditionNode
 import org.thinkit.generator.content.engine.dto.ContentCreator
 import org.thinkit.generator.content.engine.dto.ContentMatrix
 import org.thinkit.generator.content.engine.dto.ContentMeta
@@ -58,6 +62,10 @@ class ContentResourceFormatter : ResourceFormatter {
         leafVertex.add(this.createMetaNodeGroup(contentMeta, contentMatrix.contentCreator))
         leafVertex.add(this.createSelectionNodeGroup(contentMatrix.contentSelectionNodes))
 
+        if (!contentMatrix.contentConditionNodes.isEmpty()) {
+            leafVertex.add(this.createConditionNodeGroup(contentMatrix.contentConditionNodes))
+        }
+
         return ContentResource(
                 contentMeta.packageName, contentMeta.contentName, leafVertex.createResource())
     }
@@ -97,5 +105,46 @@ class ContentResourceFormatter : ResourceFormatter {
         }
 
         return selectionNodeGroup
+    }
+
+    private fun createConditionNodeGroup(
+            conditionNodes: List<ContentConditionNode>
+    ): ContentNodeGroup {
+
+        val conditionNodeGroup: ContentNodeGroup =
+                ContentNodeGroup.from(GroupKey.CONDITION_NODES.getTag()).toArray()
+
+        conditionNodes.forEach {
+            val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
+            itemGroup.add(ContentItem.from(ConditionNodeKey.CONDITION_ID.getTag(), it.conditionId))
+            itemGroup.add(ContentItem.from(ConditionNodeKey.EXCLUDE.getTag(), "false"))
+
+            val conditionGroup: ContentNodeGroup = this.createConditionGroup(it.contentConditions)
+
+            conditionNodeGroup.add(
+                    ContentNode.from(
+                            contentNodeGroup =
+                                    ContentNodeGroup.from(GroupKey.NODE.getTag())
+                                            .add(ContentNode.from(itemGroup.add(conditionGroup)))))
+        }
+
+        return conditionNodeGroup
+    }
+
+    private fun createConditionGroup(conditions: List<ContentCondition>): ContentNodeGroup {
+
+        val conditionGroup: ContentNodeGroup =
+                ContentNodeGroup.from(GroupKey.CONDITIONS.getTag()).toArray()
+
+        conditions.forEach {
+            val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
+            itemGroup.add(ContentItem.from(ConditionKey.KEY.getTag(), it.key))
+            itemGroup.add(ContentItem.from(ConditionKey.OPERATOR.getTag(), it.operator))
+            itemGroup.add(ContentItem.from(ConditionKey.OPERAND.getTag(), it.operand))
+
+            conditionGroup.add(ContentNode.from(itemGroup))
+        }
+
+        return conditionGroup
     }
 }

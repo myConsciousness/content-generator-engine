@@ -27,6 +27,9 @@ internal class ContentItemGroup : ContentComponent {
     /** コンテンツ項目リスト */
     private val contentItems: MutableList<ContentItem> = mutableListOf()
 
+    /** コンテンツノード全集合 */
+    private val contentNodeGroups: MutableList<ContentNodeGroup> = mutableListOf()
+
     companion object {
 
         /**
@@ -53,6 +56,13 @@ internal class ContentItemGroup : ContentComponent {
             items.append(comma)
         }
 
+        if (!this.contentNodeGroups.isEmpty()) {
+            this.contentNodeGroups.forEach {
+                items.append(it.createResource())
+                items.append(comma)
+            }
+        }
+
         items.setLength(items.length - comma.length)
 
         return items.toString()
@@ -65,7 +75,18 @@ internal class ContentItemGroup : ContentComponent {
      * @return 自分自身のインスタンス
      */
     fun add(contentItem: ContentItem): ContentItemGroup {
-        contentItems.add(contentItem)
+        this.contentItems.add(contentItem)
+        return this
+    }
+
+    /**
+     * コンテンツノードグループ集合追加します。
+     *
+     * @param contentNodeGroup コンテンツノードグループ集合
+     * @return 自分自身のインスタンス
+     */
+    fun add(contentNodeGroup: ContentNodeGroup): ContentItemGroup {
+        this.contentNodeGroups.add(contentNodeGroup)
         return this
     }
 }

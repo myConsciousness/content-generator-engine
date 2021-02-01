@@ -14,6 +14,7 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.generator.content.engine.catalog.Bracket
 import org.thinkit.generator.content.engine.catalog.Delimiter
 import org.thinkit.generator.content.engine.catalog.NodeType
 
@@ -64,7 +65,16 @@ internal class ContentNodeGroup(private val key: String = "") : ContentComponent
 
         this.contentNodes.forEach {
             nodes.append("\"$key\":")
-            nodes.append(it.createResource()).append(comma)
+
+            when (this.nodeType) {
+                NodeType.OBJECT -> nodes.append(it.createResource()).append(comma)
+                NodeType.ARRAY -> {
+                    nodes.append(Bracket.START.getTag())
+                            .append(it.createResource())
+                            .append(Bracket.END.getTag())
+                            .append(comma)
+                }
+            }
         }
 
         nodes.setLength(nodes.length - comma.length)
