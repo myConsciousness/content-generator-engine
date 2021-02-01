@@ -29,5 +29,5 @@ data class ContentMatrix(
         @NestedEntity val contentMeta: ContentMeta,
         @NestedEntity val contentCreator: ContentCreator,
         @NestedEntity val contentSelectionNodes: List<ContentSelectionNode>,
-        @NestedEntity val contentConditionNodes: List<ContentConditionNode>
+        @NestedEntity val contentConditionNodes: List<ContentConditionNode> = listOf()
 ) : ValidatableEntity

@@ -36,5 +36,5 @@ internal class ContentItem(private val key: String, private val value: String) :
         }
     }
 
-    override fun createResource(): String = "\"${key}\" : \"${value}\""
+    override fun createResource(): String = "\"${key}\":\"${value}\""
 }

@@ -14,6 +14,7 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.generator.content.engine.catalog.Brace
 import org.thinkit.generator.content.engine.catalog.Delimiter
 
 /**
@@ -44,12 +45,15 @@ internal class ContentLeafVertex : ContentComponent {
         val leafVertex: StringBuilder = StringBuilder(0)
         val comma: String = Delimiter.COMMA.getTag()
 
+        leafVertex.append(Brace.START.getTag())
+
         this.nodeGroups.forEach {
             leafVertex.append(it.createResource())
             leafVertex.append(comma)
         }
 
         leafVertex.setLength(leafVertex.length - comma.length)
+        leafVertex.append(Brace.END.getTag())
 
         return leafVertex.toString()
     }

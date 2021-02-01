@@ -69,7 +69,6 @@ class ContentResourceFormatter : ResourceFormatter {
 
         val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
         itemGroup.add(ContentItem.from(MetaKey.AUTHOR.getTag(), contentCreator.creator))
-        itemGroup.add(ContentItem.from(MetaKey.VERSION.getTag(), contentMeta.version))
         itemGroup.add(ContentItem.from(MetaKey.ENCODING.getTag(), contentMeta.encoding))
         itemGroup.add(ContentItem.from(MetaKey.CONTENT_NAME.getTag(), contentMeta.contentName))
         itemGroup.add(ContentItem.from(MetaKey.DESCRIPTION.getTag(), contentMeta.description))

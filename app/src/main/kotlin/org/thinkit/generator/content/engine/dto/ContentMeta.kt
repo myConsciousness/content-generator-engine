@@ -27,7 +27,6 @@ import org.thinkit.framework.envali.entity.ValidatableEntity
 @Serializable
 data class ContentMeta(
         @RequireNonBlank val packageName: String,
-        @RequireNonBlank val version: String,
         @RequireNonBlank var encoding: String = "UTF-8",
         @RequireNonBlank val contentName: String,
         @RequireNonBlank val description: String

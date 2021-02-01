@@ -63,7 +63,7 @@ internal class ContentNodeGroup(private val key: String = "") : ContentComponent
         val comma: String = Delimiter.COMMA.getTag()
 
         this.contentNodes.forEach {
-            nodes.append("\"{$key}\" : ")
+            nodes.append("\"$key\":")
             nodes.append(it.createResource()).append(comma)
         }
 

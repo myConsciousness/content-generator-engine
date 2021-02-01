@@ -15,7 +15,6 @@
 package org.thinkit.generator.content.engine.dto
 
 import kotlinx.serialization.Serializable
-import org.thinkit.framework.envali.annotation.RequireNonBlank
 import org.thinkit.framework.envali.annotation.RequireNonEmpty
 import org.thinkit.framework.envali.entity.ValidatableEntity
 
@@ -27,6 +26,6 @@ import org.thinkit.framework.envali.entity.ValidatableEntity
  */
 @Serializable
 data class ContentSelectionNode(
-        @RequireNonBlank val conditionId: String,
+        val conditionId: String = "",
         @RequireNonEmpty val contentSelections: List<ContentSelection>
 ) : ValidatableEntity
