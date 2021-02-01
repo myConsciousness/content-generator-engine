@@ -29,10 +29,10 @@ internal enum class GroupKey(private val code: Int, private val tag: String) :
     META(0, "meta"),
 
     /** 選択ノード群 */
-    SELECTION_NODES(1, "selection_nodes"),
+    SELECTION_NODES(1, "selectionNodes"),
 
     /** 条件ノード群 */
-    CONDITION_NODES(2, "condition_nodes"),
+    CONDITION_NODES(2, "conditionNodes"),
 
     /** ノnodesード */
     NODE(3, "node"),

@@ -26,7 +26,7 @@ internal enum class SelectionNodeKey(private val code: Int, private val tag: Str
         BiCatalog<SelectionNodeKey, String> {
 
     /** 条件ID */
-    CONDITION_ID(0, "condition_id");
+    CONDITION_ID(0, "conditionId");
 
     override fun getCode(): Int = this.code
 

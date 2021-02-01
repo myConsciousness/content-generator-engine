@@ -26,7 +26,7 @@ internal enum class ConditionNodeKey(private val code: Int, private val tag: Str
         BiCatalog<ConditionNodeKey, String> {
 
     /** 条件ID */
-    CONDITION_ID(0, "condition_id"),
+    CONDITION_ID(0, "conditionId"),
 
     /** 除外 */
     EXCLUDE(1, "exclude");

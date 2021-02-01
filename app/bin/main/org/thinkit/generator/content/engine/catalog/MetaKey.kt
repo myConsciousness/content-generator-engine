@@ -29,7 +29,7 @@ internal enum class MetaKey(private val code: Int, private val tag: String) :
     AUTHOR(0, "author"),
 
     /** コンテンツ名 */
-    CONTENT_NAME(1, "content_name"),
+    CONTENT_NAME(1, "contentName"),
 
     /** エンコード方式 */
     ENCODING(2, "encoding"),
