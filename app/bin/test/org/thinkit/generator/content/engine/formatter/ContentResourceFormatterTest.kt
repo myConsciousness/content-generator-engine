@@ -32,45 +32,35 @@ import org.thinkit.generator.content.engine.dto.ContentSelectionNode
  */
 class ContentResourceFormatterTest {
 
-        @Test
-        fun testWhenSelectionNodeHasSingleItem() {
+    @Test
+    fun testWhenSelectionNodeHasSingleItem() {
 
-                val contentMeta: ContentMeta =
-                                ContentMeta(
-                                                packageName = "org.thinkit.content.generator.test",
-                                                contentName = "TestContent",
-                                                description = "Test description")
+        val contentMeta: ContentMeta =
+                ContentMeta(
+                        packageName = "org.thinkit.content.generator.test",
+                        contentName = "TestContent",
+                        description = "Test description")
 
-                val contentSelectionNode: ContentSelectionNode =
-                                ContentSelectionNode(
-                                                contentSelections =
-                                                                listOf(
-                                                                                ContentSelection(
-                                                                                                key =
-                                                                                                                "key",
-                                                                                                value =
-                                                                                                                "value")))
+        val contentSelectionNode: ContentSelectionNode =
+                ContentSelectionNode(
+                        contentSelections = listOf(ContentSelection(key = "key", value = "value")))
 
-                val contentMatrix: ContentMatrix =
-                                ContentMatrix(
-                                                contentMeta = contentMeta,
-                                                contentCreator =
-                                                                ContentCreator(
-                                                                                creator =
-                                                                                                "Kato Shinya"),
-                                                contentSelectionNodes =
-                                                                listOf(contentSelectionNode))
+        val contentMatrix: ContentMatrix =
+                ContentMatrix(
+                        contentMeta = contentMeta,
+                        contentCreator = ContentCreator(creator = "Kato Shinya"),
+                        contentSelectionNodes = listOf(contentSelectionNode))
 
-                val contentResource: ContentResource =
-                                ContentResourceFormatter.newInstance().format(contentMatrix)
+        val contentResource: ContentResource =
+                ContentResourceFormatter.newInstance().format(contentMatrix)
 
-                assertNotNull(contentResource)
-                assertEquals("TestContent", contentResource.contentName)
-                assertEquals(EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM, contentResource.content)
-                assertEquals("json", contentResource.extension)
-        }
+        assertNotNull(contentResource)
+        assertEquals("TestContent", contentResource.contentName)
+        assertEquals(EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM, contentResource.content)
+        assertEquals("json", contentResource.extension)
+    }
 
-        /** 選択ノードが1つのみ項目を持っている場合の期待値 */
-        val EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM: String =
-                        "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"content_name\":\"TestContent\",\"description\":\"Test description\"},\"selection_nodes\":{\"node\":{\"condition_id\":\"\",\"key\":\"value\"}}}"
+    /** 選択ノードが1つのみ項目を持っている場合の期待値 */
+    val EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM: String =
+            "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"content_name\":\"TestContent\",\"description\":\"Test description\"},\"selection_nodes\":{\"node\":{\"condition_id\":\"\",\"key\":\"value\"}}}"
 }
