@@ -14,7 +14,9 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.formatter.JsonFormatter
 import org.thinkit.generator.content.engine.catalog.Brace
+import org.thinkit.generator.content.engine.catalog.FormatType
 
 /**
  * コンテンツリソースを生成するファクトリークラスです。
@@ -23,6 +25,9 @@ import org.thinkit.generator.content.engine.catalog.Brace
  * @since 1.0.0
  */
 internal class ContentResource(private val leafVertex: ContentLeafVertex) : ContentComponent {
+
+    /** 整形種別 */
+    private var formatType: FormatType = FormatType.NONE
 
     companion object {
 
@@ -45,6 +50,19 @@ internal class ContentResource(private val leafVertex: ContentLeafVertex) : Cont
         resource.append(this.leafVertex.createResource())
         resource.append(Brace.END.getTag())
 
-        return resource.toString()
+        return when (this.formatType) {
+            FormatType.NONE -> resource.toString()
+            FormatType.FORMAT -> JsonFormatter.of().format(resource.toString())
+        }
+    }
+
+    /**
+     * コンテンツの生成時に整形処理を行います。
+     *
+     * @return 自分自身のインスタンス
+     */
+    fun formatResource(): ContentResource {
+        this.formatType = FormatType.FORMAT
+        return this
     }
 }

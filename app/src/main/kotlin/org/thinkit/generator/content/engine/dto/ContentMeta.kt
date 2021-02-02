@@ -29,5 +29,6 @@ data class ContentMeta(
         @RequireNonBlank val packageName: String,
         @RequireNonBlank var encoding: String = "UTF-8",
         @RequireNonBlank val contentName: String,
-        @RequireNonBlank val description: String
+        @RequireNonBlank val description: String,
+        val formatResource: Boolean = false
 ) : ValidatableEntity
