@@ -66,8 +66,18 @@ class ContentResourceFormatter : ResourceFormatter {
             leafVertex.add(this.createConditionNodeGroup(contentMatrix.contentConditionNodes))
         }
 
-        return ContentResource(
-                contentMeta.packageName, contentMeta.contentName, leafVertex.createResource())
+        return when (contentMeta.formatResource) {
+            true ->
+                    ContentResource(
+                            contentMeta.packageName,
+                            contentMeta.contentName,
+                            leafVertex.formatResource().createResource())
+            false ->
+                    ContentResource(
+                            contentMeta.packageName,
+                            contentMeta.contentName,
+                            leafVertex.createResource())
+        }
     }
 
     private fun createMetaNodeGroup(

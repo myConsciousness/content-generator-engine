@@ -14,8 +14,10 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.formatter.JsonFormatter
 import org.thinkit.generator.content.engine.catalog.Brace
 import org.thinkit.generator.content.engine.catalog.Delimiter
+import org.thinkit.generator.content.engine.catalog.FormatType
 
 /**
  * コンテンツの葉頂点を生成するファクトリークラスです。
@@ -28,6 +30,8 @@ internal class ContentLeafVertex : ContentComponent {
     /** コンテンツのノード全集合 */
     private val nodeGroups: MutableList<ContentNodeGroup> = mutableListOf()
 
+    /** 整形種別 */
+    private var formatType: FormatType = FormatType.NONE
     companion object {
 
         /**
@@ -55,7 +59,10 @@ internal class ContentLeafVertex : ContentComponent {
         leafVertex.setLength(leafVertex.length - comma.length)
         leafVertex.append(Brace.END.getTag())
 
-        return leafVertex.toString()
+        return when (this.formatType) {
+            FormatType.NONE -> leafVertex.toString()
+            FormatType.FORMAT -> JsonFormatter.of().format(leafVertex.toString())
+        }
     }
 
     /**
@@ -66,6 +73,16 @@ internal class ContentLeafVertex : ContentComponent {
      */
     fun add(nodeGroup: ContentNodeGroup): ContentLeafVertex {
         this.nodeGroups.add(nodeGroup)
+        return this
+    }
+
+    /**
+     * コンテンツの生成時に整形処理を行います。
+     *
+     * @return 自分自身のインスタンス
+     */
+    fun formatResource(): ContentLeafVertex {
+        this.formatType = FormatType.FORMAT
         return this
     }
 }
