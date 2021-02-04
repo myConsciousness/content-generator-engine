@@ -25,7 +25,7 @@ import org.thinkit.api.catalog.Catalog
 internal enum class FormatType(private val code: Int) : Catalog<FormatType> {
 
     /** 整形なし */
-    NONE(0),
+    RAW(0),
 
     /** 整形あり */
     FORMAT(1);

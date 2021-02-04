@@ -71,7 +71,7 @@ class ContentResourceFormatter : ResourceFormatter {
                     ContentResource(
                             contentMeta.packageName,
                             contentMeta.contentName,
-                            leafVertex.formatResource().createResource())
+                            leafVertex.prettify().createResource())
             false ->
                     ContentResource(
                             contentMeta.packageName,

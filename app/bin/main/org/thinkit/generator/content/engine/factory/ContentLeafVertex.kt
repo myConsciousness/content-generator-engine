@@ -31,7 +31,8 @@ internal class ContentLeafVertex : ContentComponent {
     private val nodeGroups: MutableList<ContentNodeGroup> = mutableListOf()
 
     /** 整形種別 */
-    private var formatType: FormatType = FormatType.NONE
+    private var formatType: FormatType = FormatType.RAW
+
     companion object {
 
         /**
@@ -60,7 +61,7 @@ internal class ContentLeafVertex : ContentComponent {
         leafVertex.append(Brace.END.getTag())
 
         return when (this.formatType) {
-            FormatType.NONE -> leafVertex.toString()
+            FormatType.RAW -> leafVertex.toString()
             FormatType.FORMAT -> JsonFormatter.newInstance().format(leafVertex.toString())
         }
     }
@@ -81,7 +82,7 @@ internal class ContentLeafVertex : ContentComponent {
      *
      * @return 自分自身のインスタンス
      */
-    fun formatResource(): ContentLeafVertex {
+    fun prettify(): ContentLeafVertex {
         this.formatType = FormatType.FORMAT
         return this
     }
