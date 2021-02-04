@@ -101,11 +101,88 @@ class ContentResourceFormatterTest {
         assertEquals("json", contentResource.extension)
     }
 
-    /** 選択ノードが1つのみ項目を持っている場合の期待値 */
-    val EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM: String =
-            "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"contentName\":\"TestContent\",\"description\":\"Test description\"},\"selectionNodes\":[{\"node\":{\"conditionId\":\"\",\"key\":\"value\"}}]}"
+    @Test
+    fun testWhenFormatResource() {
 
-    /** 条件がある選択ノードが1つのみ項目を持っている場合の期待値 */
-    val EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM_WITH_CONDITION: String =
-            "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"contentName\":\"TestContent\",\"description\":\"Test description\"},\"selectionNodes\":[{\"node\":{\"conditionId\":\"0\",\"key\":\"value\"}}],\"conditionNodes\":[{\"node\":{\"conditionId\":\"0\",\"exclude\":\"false\",\"conditions\":[{\"key\":\"testKey\",\"operator\":\"+\",\"operand\":\"0\"}]}}]}"
+        val contentMeta: ContentMeta =
+                ContentMeta(
+                        packageName = "org.thinkit.content.generator.test",
+                        contentName = "TestContent",
+                        description = "Test description",
+                        formatResource = true)
+
+        val contentSelectionNode: ContentSelectionNode =
+                ContentSelectionNode(
+                        conditionId = "0",
+                        contentSelections = listOf(ContentSelection(key = "key", value = "value")))
+
+        val contentConditionNode: ContentConditionNode =
+                ContentConditionNode(
+                        conditionId = "0",
+                        contentConditions =
+                                listOf(
+                                        ContentCondition(
+                                                key = "testKey", operator = "+", operand = "0")))
+
+        val contentMatrix: ContentMatrix =
+                ContentMatrix(
+                        contentMeta = contentMeta,
+                        contentCreator = ContentCreator(creator = "Kato Shinya"),
+                        contentSelectionNodes = listOf(contentSelectionNode),
+                        contentConditionNodes = listOf(contentConditionNode))
+
+        val contentResource: ContentResource =
+                ContentResourceFormatter.newInstance().format(contentMatrix)
+
+        assertNotNull(contentResource)
+        assertEquals("TestContent", contentResource.contentName)
+        assertEquals(EXPECTED_FORMATTED_CONTENT_STRING, contentResource.content)
+        assertEquals("json", contentResource.extension)
+    }
+
+    companion object {
+
+        /** 選択ノードが1つのみ項目を持っている場合の期待値 */
+        const val EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM: String =
+                "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"contentName\":\"TestContent\",\"description\":\"Test description\"},\"selectionNodes\":[{\"node\":{\"conditionId\":\"\",\"key\":\"value\"}}]}"
+
+        /** 条件がある選択ノードが1つのみ項目を持っている場合の期待値 */
+        const val EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM_WITH_CONDITION: String =
+                "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"contentName\":\"TestContent\",\"description\":\"Test description\"},\"selectionNodes\":[{\"node\":{\"conditionId\":\"0\",\"key\":\"value\"}}],\"conditionNodes\":[{\"node\":{\"conditionId\":\"0\",\"exclude\":\"false\",\"conditions\":[{\"key\":\"testKey\",\"operator\":\"+\",\"operand\":\"0\"}]}}]}"
+
+        /** 整形されたコンテンツリソースの期待値 */
+        const val EXPECTED_FORMATTED_CONTENT_STRING: String =
+                """{
+  "meta":{
+    "author":"Kato Shinya",
+    "encoding":"UTF-8",
+    "contentName":"TestContent",
+    "description":"Test description"
+  },
+  "selectionNodes":[
+    {
+      "node":{
+        "conditionId":"0",
+        "key":"value"
+      }
+    }
+  ],
+  "conditionNodes":[
+    {
+      "node":{
+        "conditionId":"0",
+        "exclude":"false",
+        "conditions":[
+          {
+            "key":"testKey",
+            "operator":"+",
+            "operand":"0"
+          }
+        ]
+      }
+    }
+  ]
+}
+"""
+    }
 }

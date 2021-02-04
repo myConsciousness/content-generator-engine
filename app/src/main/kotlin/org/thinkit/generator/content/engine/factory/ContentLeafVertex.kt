@@ -14,7 +14,7 @@
 
 package org.thinkit.generator.content.engine.factory
 
-import org.thinkit.formatter.JsonFormatter
+import org.thinkit.formatter.json.JsonFormatter
 import org.thinkit.generator.content.engine.catalog.Brace
 import org.thinkit.generator.content.engine.catalog.Delimiter
 import org.thinkit.generator.content.engine.catalog.FormatType
@@ -61,7 +61,7 @@ internal class ContentLeafVertex : ContentComponent {
 
         return when (this.formatType) {
             FormatType.NONE -> leafVertex.toString()
-            FormatType.FORMAT -> JsonFormatter.of().format(leafVertex.toString())
+            FormatType.FORMAT -> JsonFormatter.newInstance().format(leafVertex.toString())
         }
     }
 
