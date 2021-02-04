@@ -80,6 +80,13 @@ class ContentResourceFormatter : ResourceFormatter {
         }
     }
 
+    /**
+     * コンテンツのメタ部分のノードグループを生成し返却します。
+     *
+     * @param contentMeta コンテンツメタ定義
+     * @param contentCreator コンテンツ作成者定義
+     * @return メタ部分のノードグループ
+     */
     private fun createMetaNodeGroup(
             contentMeta: ContentMeta,
             contentCreator: ContentCreator
@@ -94,6 +101,12 @@ class ContentResourceFormatter : ResourceFormatter {
         return ContentNodeGroup.from(GroupKey.META.getTag()).add(ContentNode.from(itemGroup))
     }
 
+    /**
+     * コンテンツの選択ノード部分のノードグループを生成し返却します。
+     *
+     * @param selectionNodes コンテンツにおける選択ノードの定義集合
+     * @return 選択ノード部分のノードグループ
+     */
     private fun createSelectionNodeGroup(
             selectionNodes: List<ContentSelectionNode>
     ): ContentNodeGroup {
@@ -117,6 +130,12 @@ class ContentResourceFormatter : ResourceFormatter {
         return selectionNodeGroup
     }
 
+    /**
+     * コンテンツの条件ノード部分のノードグループを生成し返却します。
+     *
+     * @param conditionNodes コンテンツにおける条件ノードの定義集合
+     * @return 条件ノード部分のノードグループ
+     */
     private fun createConditionNodeGroup(
             conditionNodes: List<ContentConditionNode>
     ): ContentNodeGroup {
@@ -141,6 +160,12 @@ class ContentResourceFormatter : ResourceFormatter {
         return conditionNodeGroup
     }
 
+    /**
+     * コンテンツの条件部分のノードグループを生成し返却します。
+     *
+     * @param conditions コンテンツにおける条件の定義集合
+     * @return 条件部分のノードグループ
+     */
     private fun createConditionGroup(conditions: List<ContentCondition>): ContentNodeGroup {
 
         val conditionGroup: ContentNodeGroup =
