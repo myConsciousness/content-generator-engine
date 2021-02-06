@@ -14,6 +14,8 @@
 
 package org.thinkit.generator.content.engine.factory
 
+import org.thinkit.generator.content.engine.catalog.DataType
+
 /**
  * コンテンツの項目を生成するファクトリークラスです。
  *
@@ -21,6 +23,9 @@ package org.thinkit.generator.content.engine.factory
  * @since 1.0.0
  */
 internal class ContentItem(private val key: String, private val value: String) : ContentComponent {
+
+    /** データ型 */
+    private var dataType: DataType = DataType.DEFAULT
 
     companion object {
 
@@ -36,5 +41,20 @@ internal class ContentItem(private val key: String, private val value: String) :
         }
     }
 
-    override fun createResource(): String = "\"${key}\":\"${value}\""
+    override fun createResource(): String {
+        return when (this.dataType) {
+            DataType.DEFAULT -> "\"${key}\":${value}"
+            DataType.STRING -> "\"${key}\":\"${value}\""
+        }
+    }
+
+    /**
+     * コンテンツ項目の値にダブルクオーテーションを付与します。
+     *
+     * @return 自分自身のインスタンス
+     */
+    fun withDoubleQuotes(): ContentItem {
+        this.dataType = DataType.STRING
+        return this
+    }
 }

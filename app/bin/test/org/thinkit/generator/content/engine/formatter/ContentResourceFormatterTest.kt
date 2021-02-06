@@ -148,7 +148,7 @@ class ContentResourceFormatterTest {
 
         /** 条件がある選択ノードが1つのみ項目を持っている場合の期待値 */
         const val EXPECTED_CONTENT_WITH_SINGLE_SELECTION_ITEM_WITH_CONDITION: String =
-                "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"contentName\":\"TestContent\",\"description\":\"Test description\"},\"selectionNodes\":[{\"node\":{\"conditionId\":\"0\",\"key\":\"value\"}}],\"conditionNodes\":[{\"node\":{\"conditionId\":\"0\",\"exclude\":\"false\",\"conditions\":[{\"key\":\"testKey\",\"operator\":\"+\",\"operand\":\"0\"}]}}]}"
+                "{\"meta\":{\"author\":\"Kato Shinya\",\"encoding\":\"UTF-8\",\"contentName\":\"TestContent\",\"description\":\"Test description\"},\"selectionNodes\":[{\"node\":{\"conditionId\":\"0\",\"key\":\"value\"}}],\"conditionNodes\":[{\"node\":{\"conditionId\":\"0\",\"exclude\":false,\"conditions\":[{\"key\":\"testKey\",\"operator\":\"+\",\"operand\":\"0\"}]}}]}"
 
         /** 整形されたコンテンツリソースの期待値 */
         const val EXPECTED_FORMATTED_CONTENT_STRING: String =
@@ -171,7 +171,7 @@ class ContentResourceFormatterTest {
     {
       "node":{
         "conditionId":"0",
-        "exclude":"false",
+        "exclude":false,
         "conditions":[
           {
             "key":"testKey",

@@ -93,10 +93,10 @@ class ContentResourceFormatter : ResourceFormatter {
     ): ContentNodeGroup {
 
         val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
-        itemGroup.add(ContentItem.from(MetaKey.AUTHOR.getTag(), contentCreator.creator))
-        itemGroup.add(ContentItem.from(MetaKey.ENCODING.getTag(), contentMeta.encoding))
-        itemGroup.add(ContentItem.from(MetaKey.CONTENT_NAME.getTag(), contentMeta.contentName))
-        itemGroup.add(ContentItem.from(MetaKey.DESCRIPTION.getTag(), contentMeta.description))
+        itemGroup.add(ContentItem.from(MetaKey.AUTHOR.getTag(), contentCreator.creator).withDoubleQuotes())
+        itemGroup.add(ContentItem.from(MetaKey.ENCODING.getTag(), contentMeta.encoding).withDoubleQuotes())
+        itemGroup.add(ContentItem.from(MetaKey.CONTENT_NAME.getTag(), contentMeta.contentName).withDoubleQuotes())
+        itemGroup.add(ContentItem.from(MetaKey.DESCRIPTION.getTag(), contentMeta.description).withDoubleQuotes())
 
         return ContentNodeGroup.from(GroupKey.META.getTag()).add(ContentNode.from(itemGroup))
     }
@@ -116,9 +116,9 @@ class ContentResourceFormatter : ResourceFormatter {
 
         selectionNodes.forEach {
             val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
-            itemGroup.add(ContentItem.from(SelectionNodeKey.CONDITION_ID.getTag(), it.conditionId))
+            itemGroup.add(ContentItem.from(SelectionNodeKey.CONDITION_ID.getTag(), it.conditionId).withDoubleQuotes())
 
-            it.contentSelections.forEach { itemGroup.add(ContentItem.from(it.key, it.value)) }
+            it.contentSelections.forEach { itemGroup.add(ContentItem.from(it.key, it.value).withDoubleQuotes()) }
 
             selectionNodeGroup.add(
                     ContentNode.from(
@@ -145,7 +145,7 @@ class ContentResourceFormatter : ResourceFormatter {
 
         conditionNodes.forEach {
             val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
-            itemGroup.add(ContentItem.from(ConditionNodeKey.CONDITION_ID.getTag(), it.conditionId))
+            itemGroup.add(ContentItem.from(ConditionNodeKey.CONDITION_ID.getTag(), it.conditionId).withDoubleQuotes())
             itemGroup.add(ContentItem.from(ConditionNodeKey.EXCLUDE.getTag(), when (it.exclude) {
                     true -> "true";
                     false -> "false";
@@ -176,9 +176,9 @@ class ContentResourceFormatter : ResourceFormatter {
 
         conditions.forEach {
             val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
-            itemGroup.add(ContentItem.from(ConditionKey.KEY.getTag(), it.key))
-            itemGroup.add(ContentItem.from(ConditionKey.OPERATOR.getTag(), it.operator))
-            itemGroup.add(ContentItem.from(ConditionKey.OPERAND.getTag(), it.operand))
+            itemGroup.add(ContentItem.from(ConditionKey.KEY.getTag(), it.key).withDoubleQuotes())
+            itemGroup.add(ContentItem.from(ConditionKey.OPERATOR.getTag(), it.operator).withDoubleQuotes())
+            itemGroup.add(ContentItem.from(ConditionKey.OPERAND.getTag(), it.operand).withDoubleQuotes())
 
             conditionGroup.add(ContentNode.from(itemGroup))
         }
