@@ -146,7 +146,10 @@ class ContentResourceFormatter : ResourceFormatter {
         conditionNodes.forEach {
             val itemGroup: ContentItemGroup = ContentItemGroup.newInstance()
             itemGroup.add(ContentItem.from(ConditionNodeKey.CONDITION_ID.getTag(), it.conditionId))
-            itemGroup.add(ContentItem.from(ConditionNodeKey.EXCLUDE.getTag(), "false"))
+            itemGroup.add(ContentItem.from(ConditionNodeKey.EXCLUDE.getTag(), when (it.exclude) {
+                    true -> "true";
+                    false -> "false";
+            }))
 
             val conditionGroup: ContentNodeGroup = this.createConditionGroup(it.contentConditions)
 
