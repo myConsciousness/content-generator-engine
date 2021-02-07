@@ -1,3 +1,6 @@
+![Latest Version](https://img.shields.io/badge/Latest_Version-v1.0.0-27ae60.svg?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Apache_2.0-e74c3c.svg?style=for-the-badge)
+
 # Content Generator Engine
 
 <!-- START doctoc -->
